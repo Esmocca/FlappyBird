@@ -9,7 +9,7 @@ const int ScreenHeight = 400;
 const float Birdradius = 15.0f;
 const float Obstacle = 60.0f;
 
-
+// stats variabels
 int health = 3;
 float birdX = 150.0f;
 float birdY = ScreenHeight / 2.0f;
