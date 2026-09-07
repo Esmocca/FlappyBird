@@ -9,7 +9,7 @@ const int ScreenHeight = 400;
 const float Birdradius = 15.0f;
 const float Obstacle = 60.0f;
 
-// stats variabels
+
 int health = 3;
 float birdX = 150.0f;
 float birdY = ScreenHeight / 2.0f;
@@ -81,6 +81,20 @@ void spawnobstacle () {
 
         if (!obstacles.empty() && obstacle.font().x + obstacleWidth < 0 ) {
             obstacles.erase(obstacles.begin());
+
+        }
+        if (obtecles.empty() || obstacles.back().x < ScreenWidth - 280) {
+            Obstacle newObs;
+            newObs.x = (float)ScreenWidth;
+            newObs.gapHeight = 150.0f;
+            newObs.gapY = (float)GetRandomValue (100, ScreenHeight - 140);
+            obstacles.push_back(newObs);
+
+        }
+
+        for (auto &obs : obstacles) {
+            DrawRectangle((int) obs.x, 0. (int)obstacleWidth, (int)(obs.gapY - obs.gapHeight / 2), DARKGREEN);
+            DrawRectangle((int) obs.x, (int)(obs.gapY + obs.gapHeight /2), (int)obstacleWidth, (int)(ScreenHeight -  (obsgapY + obs.gapHeight / 2)), DARKGREEN);
             
         }
 
