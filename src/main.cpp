@@ -102,6 +102,33 @@ void spawnobstacle () {
 };
 
 void coallision () {
+    if (delayTimer > 0.0f) {
+        delayTimer -= GetFrameTime();
+        return;
+    }
+    Rectangle birdRect = { birdX - birdRadius, birdY - birdRadius, birdRadius * 2, birdRadius * 2 };
+    bool hit = false;
+
+    if (birdY + birdRadius >= ScreenHeight - 40) {
+        hit = true;
+
+        birdY = ScreenHeight - 40 - birdRadius;
+        birdVelocity = 0;
+    }
+
+    for (auto &obs : obstacles) {
+        Rectangle topRect = { obs.x, 0, obstacleWidth, obs.gapY - obs.gapHeight / 2 };
+        Rectangle bottomRect = { obs.x, obs.gapY + obs.gapHeight / 2, obstacleWidth, ScreenHeight - (obs.gapY + obs.gapHeight / 2) };
+
+        if (CheckCollisionRecs(birdRect, topRect) || CheckCollisionRecs(birdRect, bottomRect)) {
+            hit = true;
+        }
+    }
+
+    if (hit){
+        health--;
+        delayTimer = 1.0f;
+    }
 
 };
 
